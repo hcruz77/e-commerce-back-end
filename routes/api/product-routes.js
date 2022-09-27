@@ -49,7 +49,8 @@ router.post('/', async (req, res) => {
     if (req.body.tagIds.length) {
       await product.setTags(req.body.tagIds);
       await product.save();
-      return await product.getTags();
+      const productTags = await product.getTags();
+      return res.status(200).json(productTags);
     }
     // if no product tags, just respond
     return res.status(200).json(product);
@@ -60,19 +61,22 @@ router.post('/', async (req, res) => {
 });
 
 // update product
-router.put('/:id', async ({ body, params: { id } }, res) => {
+router.put('/:id', async (req, res) => {
   try {
     // update product data
-    const product = await Product.update(req.body, { where: { id } });
+    await Product.update(req.body, { where: { id } });
+    const product = await Product.findbyPk(req.params.id);
     if (req.body.tagIds.length) {
       await product.setTags(req.body.tagIds);
       await product.save();
-      return await product.getTags();
+      await product.getTags();
+      const productTags = await product.getTags();
+      return res.status(200).json(productTags);
     }
     await product.save();
     return res.json(product);
   } catch (err) {
-    // console.log(err)
+     console.log(err)
     return res.status(400).json(err);
   }
 });
