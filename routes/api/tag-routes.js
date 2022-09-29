@@ -32,7 +32,11 @@ router.get('/:id', async (req, res) => {
 
 // create a new tag
 router.post('/', async (req, res) => {
-  const tagData = await Tag.create.apply(req.body);
+  const tagData = await Tag.create(
+    {
+      tag_name: req.body.tag_name,
+    },
+  );
   res.json(tagData);
 });
 
@@ -44,7 +48,7 @@ router.put('/:id', async (req, res) => {
     },
     {
       where: {
-        tag_id: req.params.tag_id,
+        tag_id: req.params.id,
       },
     }
   );
@@ -53,9 +57,9 @@ router.put('/:id', async (req, res) => {
 
 // delete on tag by its `id` value
 router.delete('/:id', async (req, res) => {
-  const tagData = await tag.destroy({
+  const tagData = await Tag.destroy({
     where: {
-      id: req.params.id
+      tag_id: req.params.id
     }
   })
   res.json(tagData);

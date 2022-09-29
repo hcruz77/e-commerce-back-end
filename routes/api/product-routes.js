@@ -37,10 +37,10 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   /* req.body should look like this...
   {
-    product_name: "Basketball",
-    price: 200.00,
-    stock: 3,
-    tagIds: [1, 2, 3, 4]
+    "product_name": "Basketball",
+    "price": 200.00,
+    "stock": 3,
+    "tagIds": [1, 2, 3, 4]
   }
   */
   try {
@@ -64,8 +64,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     // update product data
-    await Product.update(req.body, { where: { id } });
-    const product = await Product.findbyPk(req.params.id);
+    await Product.update(req.body, { where: { id: req.params.id } });
+    const product = await Product.findByPk(req.params.id);
     if (req.body.tagIds.length) {
       await product.setTags(req.body.tagIds);
       await product.save();
@@ -84,7 +84,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const productData = await Product.destroy({
     where: {
-      id: req.params.id
+      product_id: req.params.id
     }
   })
   res.json(productData);
