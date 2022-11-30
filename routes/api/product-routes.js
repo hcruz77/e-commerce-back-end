@@ -64,7 +64,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     // update product data
-    await Product.update(req.body, { where: { id: req.params.id } });
+    await Product.update(req.body, { where: {product_id: req.params.id } });
     const product = await Product.findByPk(req.params.id);
     if (req.body.tagIds.length) {
       await product.setTags(req.body.tagIds);
