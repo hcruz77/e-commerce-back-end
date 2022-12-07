@@ -6,7 +6,7 @@ Practiced using an Express.js API and Sequelize to interact with a MySQL databas
 
 ## Visuals
 
-[Demo Video](https://drive.google.com/file/d/1ZTCwSKqVX6KjYEaqbFMd1ayhvih7cyzp/view?usp=sharing)
+[Demo Video Link](https://drive.google.com/file/d/1ZTCwSKqVX6KjYEaqbFMd1ayhvih7cyzp/view?usp=sharing)
 
 
 
